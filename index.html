@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ถ่ายรูปสินค้า</title>
+</head>
+<body>
+  <h2>เพิ่มสินค้า</h2>
+  <form id="product-form">
+    <label>ชื่อสินค้า: <input type="text" id="name" required /></label><br />
+    <label>SKU: <input type="text" id="sku" required /></label><br />
+    <label>หมวดหมู่: 
+      <select id="category">
+        <option>เครื่องเขียน</option>
+        <option>อาหาร</option>
+        <option>อิเล็กทรอนิกส์</option>
+      </select>
+    </label><br />
+    <input type="file" accept="image/*" id="image" required /><br />
+    <button type="submit">บันทึก</button>
+  </form>
+
+  <script>
+    const form = document.getElementById("product-form");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value;
+      const sku = document.getElementById("sku").value;
+      const category = document.getElementById("category").value;
+      const imageFile = document.getElementById("image").files[0];
+
+      const reader = new FileReader();
+      reader.onload = async function () {
+        const base64Image = reader.result;
+
+        const response = await fetch("YOUR_GAS_DEPLOYED_URL", {
+          method: "POST",
+          body: JSON.stringify({ name, sku, category, base64Image }),
+          headers: { "Content-Type": "application/json" },
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          alert("บันทึกเรียบร้อย");
+        } else {
+          alert("เกิดข้อผิดพลาด: " + result.error);
+        }
+      };
+
+      reader.readAsDataURL(imageFile);
+    });
+  </script>
+</body>
+</html>
