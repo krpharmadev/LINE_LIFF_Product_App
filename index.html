@@ -32,7 +32,7 @@
       reader.onload = async function () {
         const base64Image = reader.result;
 
-        const response = await fetch("https://script.google.com/macros/s/AKfycbw6BsXe06ZMfZiO3xq2oAMkK5EKsDpc4i5Hp7iHxQ72ndHdCfF_3sX3jzOw7Ei-QusfEA/exec", {
+        const response = await fetch("https://script.google.com/macros/s/AKfycbzXcfBZL-255QZ-9dXyJ35NqGTnUL68G7Hld4vWbIXVBsGFAH0k3dRXbcCaocyBfR2S9A/exec", {
           method: "POST",
           body: JSON.stringify({ name, sku, category, base64Image }),
           headers: { "Content-Type": "application/json" },
