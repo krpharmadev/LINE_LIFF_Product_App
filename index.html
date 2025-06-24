@@ -32,7 +32,7 @@
       reader.onload = async function () {
         const base64Image = reader.result;
 
-        const response = await fetch("YOUR_GAS_DEPLOYED_URL", {
+        const response = await fetch("https://script.google.com/macros/s/AKfycbw6BsXe06ZMfZiO3xq2oAMkK5EKsDpc4i5Hp7iHxQ72ndHdCfF_3sX3jzOw7Ei-QusfEA/exec", {
           method: "POST",
           body: JSON.stringify({ name, sku, category, base64Image }),
           headers: { "Content-Type": "application/json" },
